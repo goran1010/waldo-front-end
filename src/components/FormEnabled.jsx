@@ -7,6 +7,7 @@ export default function FormEnabled({
   setImageURL,
   option,
   setOption,
+  allImages,
 }) {
   function handelSelect(e) {
     setOption(e.target.value);
@@ -15,7 +16,8 @@ export default function FormEnabled({
   function handleOnSubmit(e) {
     e.preventDefault();
     setIsFetching(true);
-    setImageURL("not null");
+    console.log(option);
+    setImageURL(option);
 
     setTimeout(() => {
       setGameStarted(true);
@@ -24,6 +26,10 @@ export default function FormEnabled({
 
   return (
     <form onSubmit={handleOnSubmit} className={styles.form}>
+      <h1 className={styles.h1}>
+        You can zoom in and zoom out with right click. <br /> Left click on the
+        image where you think one of the characters is.
+      </h1>
       <div>
         <label className={styles.label} htmlFor="select-image">
           Select image:{" "}
@@ -35,14 +41,14 @@ export default function FormEnabled({
           name="select-image"
           id="select-image"
         >
-          <option className={styles.option} value="image-1">
-            Image 1
+          <option className={styles.option} value={allImages[0]}>
+            Waldo in battle
           </option>
-          <option className={styles.option} value="image-2">
-            Image 2
+          <option className={styles.option} value={allImages[1]}>
+            Waldo in town
           </option>
-          <option className={styles.option} value="image-3">
-            Image 3
+          <option className={styles.option} value={allImages[2]}>
+            Waldo shopping
           </option>
         </select>{" "}
       </div>

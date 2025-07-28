@@ -1,0 +1,10 @@
+.img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+  cursor: crosshair;
+}
+.img.zoomed {
+  transform: scale(2);
+}
