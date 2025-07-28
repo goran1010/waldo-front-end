@@ -1,23 +1,21 @@
 import { useState } from "react";
-import Spinner from "./Spinner";
+import FormEnabled from "./FormEnabled";
+import FormDisabled from "./FormDisabled";
 
-export default function StartGame() {
+export default function StartGame({ setGameStarted, setImageURL }) {
   const [isFetching, setIsFetching] = useState(false);
+  const [option, setOption] = useState("image-1");
 
+  if (isFetching) {
+    return <FormDisabled option={option} />;
+  }
   return (
-    <form>
-      <div>
-        <label htmlFor="select-image">Select image: </label>{" "}
-        <select name="select-image" id="select-image">
-          <option value="image-1">Image 1</option>
-          <option value="image-2">Image 2</option>
-          <option value="image-3">Image 3</option>
-        </select>
-        <div>
-          <button type="submit">Start the game</button>
-        </div>
-      </div>
-      {isFetching ? <Spinner /> : <img src="" alt="Where's Waldo logo" />}
-    </form>
+    <FormEnabled
+      setIsFetching={setIsFetching}
+      setGameStarted={setGameStarted}
+      setImageURL={setImageURL}
+      option={option}
+      setOption={setOption}
+    />
   );
 }
