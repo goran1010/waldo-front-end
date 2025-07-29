@@ -2,6 +2,7 @@
   max-width: 50px;
   max-height: 50px;
 }
+
 .form {
   display: flex;
   justify-content: center;
@@ -25,8 +26,16 @@
   background-color: red;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
-  background-color: rgb(240, 84, 84);
+  cursor: not-allowed;
+}
+.select-disabled {
+  font-weight: bold;
+  background-color: red;
+  border: none;
+  border-radius: 5px 5px 0 0;
+  color: white;
+  padding: 5px 10px;
+  cursor: not-allowed;
 }
 .select {
   font-weight: bold;
@@ -38,6 +47,7 @@
 }
 .label {
   font-weight: bold;
+  color: white;
 }
 .option {
   font-weight: bold;
@@ -48,15 +58,17 @@
 }
 .main {
   position: fixed;
+  z-index: 99;
   display: flex;
   width: 100%;
   height: 100%;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.774);
+  background-color: rgba(77, 3, 3, 0.781);
 }
 .h1 {
   font-weight: bold;
   font-size: 16px;
   text-align: center;
+  color: white;
 }

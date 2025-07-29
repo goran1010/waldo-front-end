@@ -9,8 +9,8 @@ export default function FormDisabled({ option }) {
   return (
     <form onSubmit={handleOnSubmit} className={styles.form}>
       <h1 className={styles.h1}>
-        You can zoom in and zoom out with right click. <br /> Left click on the
-        image where you think one of the characters is.
+        You can zoom in and zoom out with <i>right click</i>. <br />
+        <i>Left click</i> on the image where you think one of the characters is.
       </h1>
       <div>
         <label className={styles.label} htmlFor="select-image">
@@ -18,7 +18,7 @@ export default function FormDisabled({ option }) {
         </label>{" "}
         <select
           value={option}
-          className={styles.select}
+          className={styles["select-disabled"]}
           disabled
           name="select-image"
           id="select-image"
