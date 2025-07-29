@@ -9,8 +9,10 @@ export default function FormDisabled({ option }) {
   return (
     <form onSubmit={handleOnSubmit} className={styles.form}>
       <h1 className={styles.h1}>
-        You can zoom in and zoom out with <i>right click</i>. <br />
-        <i>Left click</i> on the image where you think one of the characters is.
+        <i>Double click</i> on the image where you think one of the characters
+        is.
+        <br /> You can zoom in and zoom out with <i>mouse wheel</i>. <br /> Or
+        your can use controls in the top left.
       </h1>
       <div>
         <label className={styles.label} htmlFor="select-image">

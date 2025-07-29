@@ -1,10 +1,17 @@
-.img {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.3s ease;
-  cursor: crosshair;
+.control {
+  position: fixed;
+  z-index: 10;
 }
-.img.zoomed {
-  transform: scale(2);
+.button {
+  background-color: rgba(77, 3, 3, 0.781);
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
+  margin: 3px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.container {
+  cursor: move;
 }

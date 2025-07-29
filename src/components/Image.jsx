@@ -1,7 +1,30 @@
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import {
+  TransformWrapper,
+  TransformComponent,
+  useControls,
+} from "react-zoom-pan-pinch";
 import { useRef } from "react";
+import styles from "../styles/Image.module.css";
 
-export default function ClickableImage({ imageURL }) {
+const Controls = () => {
+  const { zoomIn, zoomOut, resetTransform } = useControls();
+
+  return (
+    <div className={styles.control}>
+      <button className={styles.button} onClick={() => zoomIn()}>
+        Zoom In
+      </button>
+      <button className={styles.button} onClick={() => zoomOut()}>
+        Zoom Out
+      </button>
+      <button className={styles.button} onClick={() => resetTransform()}>
+        Reset Zoom
+      </button>
+    </div>
+  );
+};
+
+export default function Image({ imageURL }) {
   const imageRef = useRef(null);
 
   const handleClick = (e) => {
@@ -22,24 +45,31 @@ export default function ClickableImage({ imageURL }) {
   };
 
   return (
-    <div
-      onDoubleClick={handleClick}
-      style={{ maxWidth: "100vw", maxHeight: "100vh" }}
-    >
+    <div onDoubleClick={handleClick} className={styles.container}>
       <TransformWrapper
         initialScale={1}
         minScale={1}
         limitToBounds={true}
         doubleClick={{ disabled: true }}
       >
-        <TransformComponent>
-          <img
-            ref={imageRef}
-            src={imageURL}
-            alt="Where's Waldo image"
-            style={{ maxWidth: "100vw", display: "block", maxHeight: "100vh" }}
-          />
-        </TransformComponent>
+        {/* eslint-disable-next-line no-unused-vars */}
+        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+          <>
+            <Controls />
+            <TransformComponent>
+              <img
+                ref={imageRef}
+                src={imageURL}
+                alt="Where's Waldo image"
+                style={{
+                  maxWidth: "100vw",
+                  display: "block",
+                  maxHeight: "100vh",
+                }}
+              />
+            </TransformComponent>
+          </>
+        )}
       </TransformWrapper>
     </div>
   );
