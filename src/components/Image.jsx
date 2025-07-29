@@ -22,7 +22,10 @@ export default function ClickableImage({ imageURL }) {
   };
 
   return (
-    <div onDoubleClick={handleClick} style={{ width: "100%", height: "100vh" }}>
+    <div
+      onDoubleClick={handleClick}
+      style={{ maxWidth: "100vw", maxHeight: "100vh" }}
+    >
       <TransformWrapper
         initialScale={1}
         minScale={1}
@@ -34,7 +37,7 @@ export default function ClickableImage({ imageURL }) {
             ref={imageRef}
             src={imageURL}
             alt="Where's Waldo image"
-            style={{ maxWidth: "100%", height: "100%", display: "block" }}
+            style={{ maxWidth: "100vw", display: "block", maxHeight: "100vh" }}
           />
         </TransformComponent>
       </TransformWrapper>
