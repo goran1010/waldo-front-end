@@ -1,22 +1,43 @@
-import { useState } from "react";
-import styles from "../styles/Image.module.css";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { useRef } from "react";
 
-export default function Image({ imageURL }) {
-  const [zoomed, setZoomed] = useState(false);
+export default function ClickableImage({ imageURL }) {
+  const imageRef = useRef(null);
 
-  function handleZoom(e) {
+  const handleClick = (e) => {
     e.preventDefault();
-    setZoomed(!zoomed);
-  }
+    const image = imageRef.current;
+    if (!image) return;
+
+    const rect = image.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const xPercent = (x / rect.width) * 100;
+    const yPercent = (y / rect.height) * 100;
+
+    console.log(
+      `Clicked at: X=${xPercent.toFixed(2)}%, Y=${yPercent.toFixed(2)}%`
+    );
+  };
 
   return (
-    <div className={styles.container}>
-      <img
-        className={`${styles.img} ${zoomed ? styles.zoomed : ""}`}
-        src={imageURL}
-        alt="Where's Waldo image"
-        onContextMenu={handleZoom}
-      />
+    <div onDoubleClick={handleClick} style={{ width: "100%", height: "100vh" }}>
+      <TransformWrapper
+        initialScale={1}
+        minScale={1}
+        limitToBounds={true}
+        doubleClick={{ disabled: true }}
+      >
+        <TransformComponent>
+          <img
+            ref={imageRef}
+            src={imageURL}
+            alt="Where's Waldo image"
+            style={{ maxWidth: "100%", height: "100%", display: "block" }}
+          />
+        </TransformComponent>
+      </TransformWrapper>
     </div>
   );
 }
