@@ -1,6 +1,6 @@
 import styles from "../styles/Select.module.css";
 
-export default function Select({ clientPos }) {
+export default function Select({ clientPos, setClientPos }) {
   if (!clientPos) return null;
 
   const boxWidth = 20;
@@ -8,6 +8,11 @@ export default function Select({ clientPos }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+  }
+
+  function handleClickCancel(e) {
+    e.preventDefault();
+    setClientPos(null);
   }
 
   return (
@@ -40,7 +45,10 @@ export default function Select({ clientPos }) {
           <button className={`${styles.button} ${styles["button-confirm"]}`}>
             Confirm
           </button>
-          <button className={`${styles.button} ${styles["button-cancel"]}`}>
+          <button
+            className={`${styles.button} ${styles["button-cancel"]}`}
+            onClick={handleClickCancel}
+          >
             Cancel
           </button>
         </div>

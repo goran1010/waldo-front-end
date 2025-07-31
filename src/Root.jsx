@@ -9,6 +9,7 @@ function Root() {
   const allImages = [waldoInBattle, waldoInTown, waldoShopping];
   const [gameStarted, setGameStarted] = useState(false);
   const [imageURL, setImageURL] = useState(allImages[0]);
+  const [user, setUser] = useState(null);
 
   if (!gameStarted) {
     return (
@@ -17,6 +18,8 @@ function Root() {
           setGameStarted={setGameStarted}
           setImageURL={setImageURL}
           allImages={allImages}
+          user={user}
+          setUser={setUser}
         />
         <Image imageURL={imageURL} />
       </>
@@ -29,6 +32,8 @@ function Root() {
         setGameStarted={setGameStarted}
         setImageURL={setImageURL}
         allImages={allImages}
+        user={user}
+        setUser={setUser}
       />
     </main>
   );

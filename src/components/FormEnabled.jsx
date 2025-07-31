@@ -8,6 +8,8 @@ export default function FormEnabled({
   option,
   setOption,
   allImages,
+  user,
+  setUser,
 }) {
   function handelSelect(e) {
     setOption(e.target.value);
@@ -16,11 +18,16 @@ export default function FormEnabled({
   function handleOnSubmit(e) {
     e.preventDefault();
     setIsFetching(true);
-    console.log(option);
     setImageURL(option);
 
-    setTimeout(() => {
+    setTimeout(async () => {
       setGameStarted(true);
+      const response = await fetch();
+      if (response.ok) {
+        const result = await response.json();
+        setUser(result);
+        console.log(result);
+      }
     }, 2000);
   }
 

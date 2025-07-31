@@ -31,8 +31,6 @@ export default function Image({
 
     setClientPos({ clientX, clientY });
 
-    console.log(`Clicked at: clientX=${clientX}, clientY=${clientY}`);
-
     console.log(
       `Clicked at: X=${xPercent.toFixed(2)}%, Y=${yPercent.toFixed(2)}%`
     );
@@ -40,7 +38,9 @@ export default function Image({
 
   return (
     <div onDoubleClick={handleClick} className={styles.container}>
-      {clientPos && <Select clientPos={clientPos} />}
+      {clientPos && (
+        <Select clientPos={clientPos} setClientPos={setClientPos} />
+      )}
       <TransformWrapper
         initialScale={1}
         minScale={1}

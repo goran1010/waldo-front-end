@@ -3,7 +3,13 @@ import FormEnabled from "./FormEnabled";
 import FormDisabled from "./FormDisabled";
 import styles from "../styles/StartGame.module.css";
 
-export default function StartGame({ setGameStarted, setImageURL, allImages }) {
+export default function StartGame({
+  setGameStarted,
+  setImageURL,
+  allImages,
+  setUser,
+  user,
+}) {
   const [isFetching, setIsFetching] = useState(false);
   const [option, setOption] = useState(allImages[0]);
 
@@ -23,6 +29,8 @@ export default function StartGame({ setGameStarted, setImageURL, allImages }) {
         option={option}
         setOption={setOption}
         allImages={allImages}
+        user={user}
+        setUser={setUser}
       />
     </header>
   );
