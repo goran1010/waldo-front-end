@@ -1,44 +1,9 @@
-import {
-  TransformWrapper,
-  TransformComponent,
-  useControls,
-} from "react-zoom-pan-pinch";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { useRef, useState } from "react";
 import styles from "../styles/Image.module.css";
 import Select from "./Select";
-
-const Controls = () => {
-  const { zoomIn, zoomOut, resetTransform } = useControls();
-
-  return (
-    <div className={styles.control}>
-      <button className={styles.button} onClick={() => zoomIn()}>
-        Zoom In
-      </button>
-      <button className={styles.button} onClick={() => zoomOut()}>
-        Zoom Out
-      </button>
-      <button className={styles.button} onClick={() => resetTransform()}>
-        Reset Zoom
-      </button>
-    </div>
-  );
-};
-
-function RestartGame({ setGameStarted, setImageURL, allImages }) {
-  function handleRestart() {
-    setGameStarted(false);
-    setImageURL(allImages[0]);
-  }
-  return (
-    <button
-      className={`${styles["restart-game"]} ${styles.button}`}
-      onClick={handleRestart}
-    >
-      Restart Game
-    </button>
-  );
-}
+import RestartGame from "./RestartGame";
+import Controls from "./Controls";
 
 export default function Image({
   imageURL,
