@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import StartGame from "./components/StartGame";
 import Image from "./components/Image";
 import waldoInBattle from "./assets/waldo-in-battle.jpeg";
@@ -23,9 +23,14 @@ function Root() {
     );
   }
   return (
-    <>
-      <Image imageURL={imageURL} />
-    </>
+    <main>
+      <Image
+        imageURL={imageURL}
+        setGameStarted={setGameStarted}
+        setImageURL={setImageURL}
+        allImages={allImages}
+      />
+    </main>
   );
 }
 export default Root;

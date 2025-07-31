@@ -3,8 +3,9 @@ import {
   TransformComponent,
   useControls,
 } from "react-zoom-pan-pinch";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import styles from "../styles/Image.module.css";
+import Select from "./Select";
 
 const Controls = () => {
   const { zoomIn, zoomOut, resetTransform } = useControls();
@@ -24,8 +25,29 @@ const Controls = () => {
   );
 };
 
-export default function Image({ imageURL }) {
+function RestartGame({ setGameStarted, setImageURL, allImages }) {
+  function handleRestart() {
+    setGameStarted(false);
+    setImageURL(allImages[0]);
+  }
+  return (
+    <button
+      className={`${styles["restart-game"]} ${styles.button}`}
+      onClick={handleRestart}
+    >
+      Restart Game
+    </button>
+  );
+}
+
+export default function Image({
+  imageURL,
+  setGameStarted,
+  setImageURL,
+  allImages,
+}) {
   const imageRef = useRef(null);
+  const [clientPos, setClientPos] = useState(null);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -33,11 +55,18 @@ export default function Image({ imageURL }) {
     if (!image) return;
 
     const rect = image.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
 
     const xPercent = (x / rect.width) * 100;
     const yPercent = (y / rect.height) * 100;
+
+    setClientPos({ clientX, clientY });
+
+    console.log(`Clicked at: clientX=${clientX}, clientY=${clientY}`);
 
     console.log(
       `Clicked at: X=${xPercent.toFixed(2)}%, Y=${yPercent.toFixed(2)}%`
@@ -46,6 +75,7 @@ export default function Image({ imageURL }) {
 
   return (
     <div onDoubleClick={handleClick} className={styles.container}>
+      {clientPos && <Select clientPos={clientPos} />}
       <TransformWrapper
         initialScale={1}
         minScale={1}
@@ -56,6 +86,12 @@ export default function Image({ imageURL }) {
         {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
           <>
             <Controls />
+
+            <RestartGame
+              setGameStarted={setGameStarted}
+              setImageURL={setImageURL}
+              allImages={allImages}
+            />
             <TransformComponent>
               <img
                 ref={imageRef}
