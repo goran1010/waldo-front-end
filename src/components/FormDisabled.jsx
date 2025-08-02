@@ -25,13 +25,13 @@ export default function FormDisabled({ option }) {
           name="select-image"
           id="select-image"
         >
-          <option className={styles.option} value="image-1">
+          <option className={styles.option} value="1">
             Waldo in battle
           </option>
-          <option className={styles.option} value="image-2">
+          <option className={styles.option} value="2">
             Waldo in town
           </option>
-          <option className={styles.option} value="image-3">
+          <option className={styles.option} value="3">
             Waldo shopping
           </option>
         </select>{" "}

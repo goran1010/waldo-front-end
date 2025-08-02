@@ -1,13 +1,9 @@
 import styles from "../styles/Image.module.css";
 
-export default function RestartGame({
-  setGameStarted,
-  setImageURL,
-  allImages,
-}) {
+export default function RestartGame({ setGameStarted, setImage, allImages }) {
   function handleRestart() {
     setGameStarted(false);
-    setImageURL(allImages[0]);
+    setImage(allImages[0]);
   }
   return (
     <button

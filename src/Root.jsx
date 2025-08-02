@@ -6,9 +6,13 @@ import waldoInTown from "./assets/waldo-in-town.jpeg";
 import waldoShopping from "./assets/waldo-shopping.jpeg";
 
 function Root() {
-  const allImages = [waldoInBattle, waldoInTown, waldoShopping];
+  const allImages = [
+    { id: 1, URL: waldoInBattle },
+    { id: 2, URL: waldoInTown },
+    { id: 3, URL: waldoShopping },
+  ];
   const [gameStarted, setGameStarted] = useState(false);
-  const [imageURL, setImageURL] = useState(allImages[0]);
+  const [image, setImage] = useState(allImages[0]);
   const [user, setUser] = useState(null);
 
   if (!gameStarted) {
@@ -16,21 +20,22 @@ function Root() {
       <>
         <StartGame
           setGameStarted={setGameStarted}
-          setImageURL={setImageURL}
+          setImage={setImage}
           allImages={allImages}
           user={user}
           setUser={setUser}
+          image={image}
         />
-        <Image imageURL={imageURL} />
+        <Image image={image} />
       </>
     );
   }
   return (
     <main>
       <Image
-        imageURL={imageURL}
+        image={image}
         setGameStarted={setGameStarted}
-        setImageURL={setImageURL}
+        setImage={setImage}
         allImages={allImages}
         user={user}
         setUser={setUser}

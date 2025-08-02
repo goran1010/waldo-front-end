@@ -6,20 +6,25 @@ import RestartGame from "./RestartGame";
 import Controls from "./Controls";
 
 export default function Image({
-  imageURL,
+  image,
   setGameStarted,
-  setImageURL,
+  setImage,
   allImages,
+  user,
 }) {
   const imageRef = useRef(null);
   const [clientPos, setClientPos] = useState(null);
+  const [coorPos, setCoorPos] = useState(null);
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    const image = imageRef.current;
-    if (!image) return;
+    if (clientPos) {
+      return;
+    }
+    const newImage = imageRef.current;
+    if (!newImage) return;
 
-    const rect = image.getBoundingClientRect();
+    const rect = newImage.getBoundingClientRect();
     const clientX = e.clientX;
     const clientY = e.clientY;
 
@@ -28,18 +33,21 @@ export default function Image({
 
     const xPercent = (x / rect.width) * 100;
     const yPercent = (y / rect.height) * 100;
+    setCoorPos({ x: xPercent, y: yPercent });
 
     setClientPos({ clientX, clientY });
-
-    console.log(
-      `Clicked at: X=${xPercent.toFixed(2)}%, Y=${yPercent.toFixed(2)}%`
-    );
   };
 
   return (
     <div onDoubleClick={handleClick} className={styles.container}>
       {clientPos && (
-        <Select clientPos={clientPos} setClientPos={setClientPos} />
+        <Select
+          clientPos={clientPos}
+          setClientPos={setClientPos}
+          coorPos={coorPos}
+          image={image}
+          user={user}
+        />
       )}
       <TransformWrapper
         initialScale={1}
@@ -54,13 +62,13 @@ export default function Image({
 
             <RestartGame
               setGameStarted={setGameStarted}
-              setImageURL={setImageURL}
+              setImage={setImage}
               allImages={allImages}
             />
             <TransformComponent>
               <img
                 ref={imageRef}
-                src={imageURL}
+                src={image.URL}
                 alt="Where's Waldo image"
                 style={{
                   maxWidth: "100vw",

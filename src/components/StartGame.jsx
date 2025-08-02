@@ -5,13 +5,14 @@ import styles from "../styles/StartGame.module.css";
 
 export default function StartGame({
   setGameStarted,
-  setImageURL,
+  setImage,
   allImages,
   setUser,
   user,
+  image,
 }) {
   const [isFetching, setIsFetching] = useState(false);
-  const [option, setOption] = useState(allImages[0]);
+  const [option, setOption] = useState(allImages[0].id);
 
   if (isFetching) {
     return (
@@ -25,12 +26,13 @@ export default function StartGame({
       <FormEnabled
         setIsFetching={setIsFetching}
         setGameStarted={setGameStarted}
-        setImageURL={setImageURL}
+        setImage={setImage}
         option={option}
         setOption={setOption}
         allImages={allImages}
         user={user}
         setUser={setUser}
+        image={image}
       />
     </header>
   );

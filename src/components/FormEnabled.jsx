@@ -1,15 +1,16 @@
 import styles from "../styles/StartGame.module.css";
 import waldo from "../assets/waldo-head.png";
+const VITE_URL = import.meta.env.VITE_URL || "http://localhost:3000";
 
 export default function FormEnabled({
   setIsFetching,
   setGameStarted,
-  setImageURL,
+  setImage,
   option,
   setOption,
   allImages,
-  user,
   setUser,
+  image,
 }) {
   function handelSelect(e) {
     setOption(e.target.value);
@@ -18,17 +19,27 @@ export default function FormEnabled({
   function handleOnSubmit(e) {
     e.preventDefault();
     setIsFetching(true);
-    setImageURL(option);
+
+    setImage(allImages[option - 1]);
 
     setTimeout(async () => {
       setGameStarted(true);
-      const response = await fetch();
+      const response = await fetch(`${VITE_URL}/api/users`, {
+        mode: "cors",
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          imageId: image.id,
+        }),
+      });
       if (response.ok) {
         const result = await response.json();
         setUser(result);
         console.log(result);
       }
-    }, 2000);
+    }, 1000);
   }
 
   return (
@@ -50,13 +61,13 @@ export default function FormEnabled({
           name="select-image"
           id="select-image"
         >
-          <option className={styles.option} value={allImages[0]}>
+          <option className={styles.option} value={allImages[0].id}>
             Waldo in battle
           </option>
-          <option className={styles.option} value={allImages[1]}>
+          <option className={styles.option} value={allImages[1].id}>
             Waldo in town
           </option>
-          <option className={styles.option} value={allImages[2]}>
+          <option className={styles.option} value={allImages[2].id}>
             Waldo shopping
           </option>
         </select>{" "}
