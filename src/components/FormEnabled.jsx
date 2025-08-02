@@ -10,7 +10,6 @@ export default function FormEnabled({
   setOption,
   allImages,
   setUser,
-  image,
 }) {
   function handelSelect(e) {
     setOption(e.target.value);
@@ -31,7 +30,7 @@ export default function FormEnabled({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          imageId: image.id,
+          imageId: Number(option),
         }),
       });
       if (response.ok) {
