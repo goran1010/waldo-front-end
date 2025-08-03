@@ -31,7 +31,7 @@ function Root() {
     );
   }
   return (
-    <main>
+    <>
       <Image
         image={image}
         setGameStarted={setGameStarted}
@@ -40,7 +40,7 @@ function Root() {
         user={user}
         setUser={setUser}
       />
-    </main>
+    </>
   );
 }
 export default Root;

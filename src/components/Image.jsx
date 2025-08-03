@@ -4,6 +4,8 @@ import styles from "../styles/Image.module.css";
 import Select from "./Select";
 import RestartGame from "./RestartGame";
 import Controls from "./Controls";
+import Alert from "./Alert";
+import GameWon from "./GameWon";
 
 export default function Image({
   image,
@@ -15,6 +17,8 @@ export default function Image({
   const imageRef = useRef(null);
   const [clientPos, setClientPos] = useState(null);
   const [coorPos, setCoorPos] = useState(null);
+  const [alert, setAlert] = useState(null);
+  const [gameWon, setGameWon] = useState(null);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -40,6 +44,8 @@ export default function Image({
 
   return (
     <div onDoubleClick={handleClick} className={styles.container}>
+      {alert && <Alert alert={alert} setAlert={setAlert} />}
+      {gameWon && <GameWon gameWon={gameWon} setGameWon={setGameWon} />}
       {clientPos && (
         <Select
           clientPos={clientPos}
@@ -47,6 +53,8 @@ export default function Image({
           coorPos={coorPos}
           image={image}
           user={user}
+          setAlert={setAlert}
+          setGameWon={setGameWon}
         />
       )}
       <TransformWrapper

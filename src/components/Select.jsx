@@ -8,6 +8,8 @@ export default function Select({
   coorPos,
   image,
   user,
+  setAlert,
+  setGameWon,
 }) {
   const character = useRef(null);
 
@@ -16,7 +18,7 @@ export default function Select({
 
   async function handleSubmit(e) {
     e.preventDefault();
-
+    console.log(coorPos);
     const response = await fetch(`${VITE_URL}/api/users/${user.id}`, {
       mode: "cors",
       method: "put",
@@ -29,11 +31,19 @@ export default function Select({
         coordinates: coorPos,
       }),
     });
-
-    if (response.ok) {
-      const result = await response.json();
+    const result = await response.json();
+    if (response.status === 200) {
       console.log(result);
+      setAlert({ status: response.status, result });
+      return;
     }
+    if (response.status === 201) {
+      console.log(result);
+      setGameWon(result);
+      return;
+    }
+    setAlert({ status: response.status, result });
+    console.log(result);
   }
 
   function handleClickCancel(e) {
