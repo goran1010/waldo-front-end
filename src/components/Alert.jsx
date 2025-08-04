@@ -1,32 +1,35 @@
-export default function Alert({ alert, setAlert }) {
+import styles from "../styles/Alert.module.css";
+
+export default function Alert({ alert, setAlert, setClientPos }) {
   return (
-    <div
-      style={{
-        position: "absolute",
-        zIndex: "99",
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div style={{ backgroundColor: "red" }}>
-        {alert.status === 400 ? (
-          <div>
-            <p>{alert.result} is not at those coordinates !</p>
-            <button
-              onClick={() => {
-                setAlert(null);
-              }}
-            >
-              OK
-            </button>
-          </div>
-        ) : (
-          <div></div>
-        )}
-      </div>
+    <div className={styles.container}>
+      {alert.status === 400 ? (
+        <div className={styles.card}>
+          <p>{alert.result} is not at those coordinates !</p>
+          <button
+            className={styles.button}
+            onClick={() => {
+              setAlert(null);
+              setClientPos(null);
+            }}
+          >
+            OK
+          </button>
+        </div>
+      ) : (
+        <div className={styles.card}>
+          <p>Congratulations you found {alert.result} !</p>
+          <button
+            className={styles.button}
+            onClick={() => {
+              setAlert(null);
+              setClientPos(null);
+            }}
+          >
+            OK
+          </button>
+        </div>
+      )}
     </div>
   );
 }

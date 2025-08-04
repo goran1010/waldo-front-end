@@ -6,6 +6,7 @@ import RestartGame from "./RestartGame";
 import Controls from "./Controls";
 import Alert from "./Alert";
 import GameWon from "./GameWon";
+import Score from "./Score";
 
 export default function Image({
   image,
@@ -19,6 +20,7 @@ export default function Image({
   const [coorPos, setCoorPos] = useState(null);
   const [alert, setAlert] = useState(null);
   const [gameWon, setGameWon] = useState(null);
+  const [score, setScore] = useState(null);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -44,8 +46,24 @@ export default function Image({
 
   return (
     <div onDoubleClick={handleClick} className={styles.container}>
-      {alert && <Alert alert={alert} setAlert={setAlert} />}
-      {gameWon && <GameWon gameWon={gameWon} setGameWon={setGameWon} />}
+      {score && (
+        <Score
+          score={score}
+          setGameStarted={setGameStarted}
+          setImage={setImage}
+          allImages={allImages}
+        />
+      )}
+      {alert && (
+        <Alert alert={alert} setAlert={setAlert} setClientPos={setClientPos} />
+      )}
+      {gameWon && (
+        <GameWon
+          gameWon={gameWon}
+          setGameWon={setGameWon}
+          setScore={setScore}
+        />
+      )}
       {clientPos && (
         <Select
           clientPos={clientPos}
