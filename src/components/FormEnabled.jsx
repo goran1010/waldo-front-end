@@ -34,6 +34,7 @@ export default function FormEnabled({
         }),
       });
       if (response.ok) {
+        console.log(result);
         const result = await response.json();
         setUser(result);
       }
