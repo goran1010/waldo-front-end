@@ -34,8 +34,8 @@ export default function FormEnabled({
         }),
       });
       if (response.ok) {
-        console.log(result);
         const result = await response.json();
+        console.log(result);
         setUser(result);
       }
     }, 1000);
