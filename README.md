@@ -6,10 +6,10 @@ Front-end for the Where's Waldo game. Built using React and styled with CSS modu
 
 ```bash
 # Clone the repository
-git clone https://github.com/goran1010/template-vite-react-js.git
+git clone git@github.com:goran1010/waldo-front-end.git
 
 # Navigate to project directory
-cd template-vite-react-js
+cd waldo-front-end
 
 # Install dependencies
 npm install
